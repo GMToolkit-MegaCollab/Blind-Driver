@@ -18,8 +18,6 @@ public class PassengerController : MonoBehaviour {
     
     public void BumperCall(Bumpers.Direction direction, Bumpers.IntensityLevel intensity)
     {
-        Debug.Log("BumperCall");
-
         // These responses are mostly panic based. If the intensity is moderate, then the emotion takes part,
         // but any closer and it's pure panic
         Passenger.Directions sound_pool = null;

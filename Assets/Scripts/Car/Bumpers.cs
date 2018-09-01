@@ -72,10 +72,11 @@ public class Bumpers : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (rb2d == null) return;
+
         Vector2 localVel = transform.InverseTransformDirection(rb2d.velocity);
         if (localVel.x > 0)
         {
-            Debug.Log(localVel);
             Gizmos.DrawLine(rb2d.position,
                 rb2d.position +
                 (Vector2)(Quaternion.Euler(0, 0, rb2d.rotation) *
