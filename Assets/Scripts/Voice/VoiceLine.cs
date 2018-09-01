@@ -5,19 +5,20 @@ using UnityEngine;
 public class VoiceLine : MonoBehaviour {
 
     public int priority;
-    private PassengerController passenger;
+    [HideInInspector]
+    public PassengerController2 passenger;
     private float cooldown = 0;
-    private Dictionary<PassengerController.Emotion, AudioClip> audioClipDictionary;
+    private Dictionary<PassengerController2.Emotion, AudioClip> audioClipDictionary;
 
     [System.Serializable]
     public struct EmotionalAudioClip {
-        public PassengerController.Emotion emotion;
+        public PassengerController2.Emotion emotion;
         public AudioClip audioClip;
     }
     public EmotionalAudioClip[] audioClips = { new EmotionalAudioClip { } };
 
     private void Start() {
-        audioClipDictionary = new Dictionary<PassengerController.Emotion, AudioClip>();
+        audioClipDictionary = new Dictionary<PassengerController2.Emotion, AudioClip>();
         foreach (EmotionalAudioClip e in audioClips) {
             if (audioClipDictionary.ContainsKey(e.emotion)) {
                 Debug.LogWarning("Duplicate emotion ignored");
@@ -37,10 +38,10 @@ public class VoiceLine : MonoBehaviour {
         audioClips = null;
     }
 
-    PassengerController GetPassenger(Transform t) {
+    PassengerController2 GetPassenger(Transform t) {
         if (t == null)
             return null;
-        return t.GetComponent<PassengerController>() ?? GetPassenger(t.parent);
+        return t.GetComponent<PassengerController2>() ?? GetPassenger(t.parent);
     }
 
     private void Update() {
@@ -72,13 +73,14 @@ public class VoiceLine : MonoBehaviour {
         AudioClip audioClip;
         if (audioClipDictionary.TryGetValue(passenger.emotion, out audioClip)) {
 
-        } else if (audioClipDictionary.TryGetValue(PassengerController.Emotion.Neutral, out audioClip)) {
+        } else if (audioClipDictionary.TryGetValue(PassengerController2.Emotion.Neutral, out audioClip)) {
 
         } else {
             audioClip = new List<AudioClip>(audioClipDictionary.Values)[0];
         }
 
         passenger.audioSource.clip = audioClip;
+        passenger.audioSource.Play();
         passenger.lastVoiceLineStarted = this;
         this.cooldown = cooldown + audioClip.length;
         return true;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Car : MonoBehaviour {
 
+    public AudioClip crashSound;
     public AudioSource tire_sounds;
     public new Rigidbody2D rigidbody;
     public float volume_scale;
@@ -45,7 +46,10 @@ public class Car : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         PassOnCollisionEnter2DToChildren(transform, collision);
-        //todo: make crash noise
+        if (crashSound != null) {
+            foreach (var contact in collision.contacts)
+                AudioSource.PlayClipAtPoint(crashSound, contact.point, contact.relativeVelocity.magnitude);
+        }
     }
 
     private void PassOnCollisionEnter2DToChildren(Transform t, Collision2D collision) {
