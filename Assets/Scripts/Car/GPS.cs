@@ -14,6 +14,8 @@ public class GPS : MonoBehaviour {
 
 	private NavMeshPath path;
 	private NavMeshQueryFilter qfilter;
+
+	public float distance;
 	public Vector3[] Path;
 
 	//Load gameobjects and then create and bake a navmesh and also create a player navmesh agent
@@ -106,6 +108,15 @@ public class GPS : MonoBehaviour {
 	private void UpdatePath() {
 		NavMesh.CalculatePath(new Vector3(this.transform.position.x, 0f, this.transform.position.y), target, qfilter, path);
 		Path = new Vector3[path.corners.Length];
+		distance = 0f;
 		for (int i = 0; i < path.corners.Length; i++) Path[i] = new Vector3(path.corners[i].x, path.corners[i].z, 0f);
+		for (int i = 1; i < path.corners.Length; i++) distance += Mathf.Sqrt((Path[i].x-Path[i-1].x)*(Path[i].x-Path[i-1].x) + (Path[i].y-Path[i-1].y)*(Path[i].y-Path[i-1].y));
 	}
 }
+
+/*
+ *CREDITS IF THIS GETS STOLEN
+ *Programming: IQuick 143, TrolledWoods
+ *Organization: Meesto, IQuick 143, TrolledWoods
+ *Voice + sounds: Meesto, TheBasementNerd
+ */
