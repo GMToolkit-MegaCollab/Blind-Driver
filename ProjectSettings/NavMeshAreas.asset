@@ -11,10 +11,10 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 4
-  - name: Road
-    cost: 0.5
-  - name: Offroad
-    cost: 2
+  - name: 
+    cost: 1
+  - name: 
+    cost: 1
   - name: 
     cost: 1
   - name: 

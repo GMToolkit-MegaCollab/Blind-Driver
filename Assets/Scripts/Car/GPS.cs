@@ -18,12 +18,15 @@ public class GPS : PassengerController2 {
     public float distance;
     public Vector2[] Path;
 
-    public VoiceLine right;
-    public VoiceLine left;
-    public VoiceLine straight;
     public VoiceLine uTurn;
-    public VoiceLine slightRight;
-    public VoiceLine slightLeft;
+    public VoiceLine startingNavigation;
+
+    public VoiceLine[] right;
+    public VoiceLine[] left;
+    public VoiceLine[] slightRight;
+    public VoiceLine[] slightLeft;
+
+    public AudioClip[] digits;
 
     //Load gameobjects and then create and bake a navmesh and also create a player navmesh agent
     void Start() {
@@ -39,7 +42,7 @@ public class GPS : PassengerController2 {
         //Offroad.GetComponent<NavMeshModifier>().area = 4;
         //Road.GetComponent<NavMeshModifier>().overrideArea = true;
         //Road.GetComponent<NavMeshModifier>().area = 3;
-        Offroad.transform.SetParent(parent.transform);
+        //Offroad.transform.SetParent(parent.transform);
         Road.transform.SetParent(parent.transform);
         Obstacle.transform.SetParent(parent.transform);
 
@@ -57,7 +60,7 @@ public class GPS : PassengerController2 {
             NavMeshSurfaces.Add(obj.GetComponent<NavMeshSurface>());
         }
 
-        for (int i = 0; i < Roads.Length; i++) {
+        /*for (int i = 0; i < Roads.Length; i++) {
             Road item = Roads[i];
             GameObject obj = new GameObject("Road " + i, new System.Type[] { typeof(BoxCollider), typeof(NavMeshSurface) });
             obj.transform.SetParent(Road.transform);
@@ -65,7 +68,7 @@ public class GPS : PassengerController2 {
             obj.transform.localScale = new Vector3(item.transform.localScale.x * item.boxcol.size.x, 1f, item.transform.localScale.y * item.boxcol.size.y);
             obj.GetComponent<NavMeshSurface>().useGeometry = NavMeshCollectGeometry.PhysicsColliders;
             NavMeshSurfaces.Add(obj.GetComponent<NavMeshSurface>());
-        }
+        }*/
 
         for (int i = 0; i < Obstacles.Length; i++) {
             Obstacle item = Obstacles[i];
@@ -91,15 +94,19 @@ public class GPS : PassengerController2 {
 
         //Finally update path so we're done
         UpdatePath();
+
+        //also start that one audio cue
+        startingNavigation.audioClipDictionary[Emotion.Neutral] = Combine(startingNavigation.audioClipDictionary[Emotion.Neutral], digits[1]);
+        startingNavigation.Trigger();
     }
 
     void Update() {
 
-        /*elapsed += Time.deltaTime;
-		if (elapsed >= 1.0f) {
-			elapsed = 0f;
-			UpdatePath();
-		}*/
+        //elapsed += Time.deltaTime;
+        //if (elapsed >= 1.0f) {
+        //	elapsed = 0f;
+        //	UpdatePath();
+        //}
         UpdatePath(); //we have enough processing power to do this every tick
 
 #if UNITY_EDITOR
@@ -110,38 +117,44 @@ public class GPS : PassengerController2 {
 #endif
         if (Path == null || Path.Length < 2)
             return;
-        VoiceLine line;
         int ind = 0;
         Vector2 segNow = Path[ind] - (Vector2)transform.position;
-        while (segNow.magnitude < 0.5f && Path.Length > ind+2) {
+        while (segNow.magnitude < 0.5f && Path.Length > ind + 2) {
             ind++;
             segNow = Path[ind] - (Vector2)transform.position;
         }
-        Debug.DrawRay(transform.position - Vector3.forward, segNow, Color.red);
-        Debug.DrawRay(transform.position - Vector3.forward, transform.forward, Color.blue);
-        
-        if (Vector2.Angle(segNow, transform.forward) > 90) {
-            line = uTurn;
-        } else {
-            Vector2 segAfter = Path[ind + 1] - Path[ind];
-            Debug.DrawRay(transform.position - Vector3.forward + (Vector3)segNow, segAfter, Color.red);
-            float angleDiff = Vector2.SignedAngle(segNow, segAfter);
-            if (angleDiff > 45)
-                line = left;
-            else if (angleDiff < -45)
-                line = right;
-            else if (angleDiff > 15)
-                line = slightLeft;
-            else if (angleDiff < -15)
-                line = slightRight;
-            else
-                line = straight;
+        Vector2 segAfter = Path[ind + 1] - Path[ind];
+
+        if (segNow.magnitude < 0.5f) {
+            if (Vector2.Angle(segAfter, transform.forward) > 90)
+                uTurn.Trigger(5);
+            return;
         }
-        //todo: recalculating
-        if (line != null) {
-            Debug.Log(line.name);
-            if (segNow.magnitude < 1)
-                line.Trigger();
+
+        if (Vector2.Angle(segNow, transform.forward) > 90) {
+            uTurn.Trigger(5);
+            return;
+        }
+
+        Debug.DrawRay(transform.position - Vector3.forward + (Vector3)segNow, segAfter, Color.red);
+        float angleDiff = Vector2.SignedAngle(segNow, segAfter);
+
+        VoiceLine[] lines = null;
+        if (angleDiff > 45)
+            lines = left;
+        else if (angleDiff < -45)
+            lines = right;
+        else if (angleDiff > 15)
+            lines = slightLeft;
+        else if (angleDiff < -15)
+            lines = slightRight;
+
+        if (lines != null) {
+            if (Mathf.Abs(segNow.magnitude - 10) < 1) {
+                lines[0].Trigger(5);
+            } else if (segNow.magnitude < 3) {
+                lines[1].Trigger(5);
+            }
         }
     }
 
@@ -157,11 +170,45 @@ public class GPS : PassengerController2 {
         for (int i = 0; i < path.corners.Length; i++) Path[i] = new Vector2(path.corners[i].x, path.corners[i].z);
         for (int i = 1; i < path.corners.Length; i++) distance += Mathf.Sqrt((Path[i].x - Path[i - 1].x) * (Path[i].x - Path[i - 1].x) + (Path[i].y - Path[i - 1].y) * (Path[i].y - Path[i - 1].y));
     }
+
+    public static AudioClip Combine(params AudioClip[] clips) {
+        if (clips == null || clips.Length == 0)
+            return null;
+
+        int length = 0;
+        for (int i = 0; i < clips.Length; i++) {
+            if (clips[i] == null)
+                continue;
+
+            length += clips[i].samples * clips[i].channels;
+        }
+
+        float[] data = new float[length];
+        length = 0;
+        for (int i = 0; i < clips.Length; i++) {
+            if (clips[i] == null)
+                continue;
+
+            float[] buffer = new float[clips[i].samples * clips[i].channels];
+            clips[i].GetData(buffer, 0);
+            buffer.CopyTo(data, length);
+            length += buffer.Length;
+        }
+
+        if (length == 0)
+            return null;
+
+        //AudioClip result = AudioClip.Create("Combine", length / 2, 2, clips[0].frequency, false); //stereo
+        AudioClip result = AudioClip.Create("Combine", length, 1, clips[0].frequency, false); //mono
+        result.SetData(data, 0);
+
+        return result;
+    }
 }
 
 /*
  *CREDITS IF THIS GETS STOLEN
- *Programming: IQuick 143, TrolledWoods
+ *Programming: IQuick 143, TrolledWoods, Thunderous Echo
  *Organization: Meesto, IQuick 143, TrolledWoods
  *Voice + sounds: Meesto, TheBasementNerd
  */

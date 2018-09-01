@@ -8,7 +8,8 @@ public class VoiceLine : MonoBehaviour {
     [HideInInspector]
     public PassengerController2 passenger;
     private float cooldown = 0;
-    private Dictionary<PassengerController2.Emotion, AudioClip> audioClipDictionary;
+    [HideInInspector]
+    public Dictionary<PassengerController2.Emotion, AudioClip> audioClipDictionary;
 
     [System.Serializable]
     public struct EmotionalAudioClip {
@@ -17,7 +18,7 @@ public class VoiceLine : MonoBehaviour {
     }
     public EmotionalAudioClip[] audioClips = { new EmotionalAudioClip { } };
 
-    private void Start() {
+    private void Awake() {
         audioClipDictionary = new Dictionary<PassengerController2.Emotion, AudioClip>();
         foreach (EmotionalAudioClip e in audioClips) {
             if (audioClipDictionary.ContainsKey(e.emotion)) {
@@ -54,6 +55,9 @@ public class VoiceLine : MonoBehaviour {
     public virtual void OnCollide(Collision2D collision) { }
 
     public bool Trigger(float cooldown = 0) {
+
+        if (this.cooldown > 0)
+            return false;
 
         if (audioClipDictionary.Count == 0) {
             Debug.LogWarning("No audio clips");
