@@ -6,6 +6,7 @@ public class Car : MonoBehaviour {
 
     public AudioClip crashSound;
     public AudioSource tire_sounds;
+    public AudioSource engine;
     public new Rigidbody2D rigidbody;
 
     // Maybe have integer of how much velocity the car has an increase it by one or decrease by one 
@@ -31,6 +32,8 @@ public class Car : MonoBehaviour {
 
         if (tire_sounds != null)
             tire_sounds.volume = rigidbody.velocity.magnitude;
+        if (engine != null)
+            engine.volume = Mathf.Abs(Input.GetAxis("Vertical"));
 
         //todo: change engine noise based on Input.GetAxisRaw("Vertical")
         //todo: play steering wheel noise based on Input.GetAxisRaw("Vertical")

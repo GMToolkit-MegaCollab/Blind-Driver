@@ -152,22 +152,43 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82254255264750020, guid: b0f325c684e52ba41834a57431b4128e,
+    - target: {fileID: 82328757117422572, guid: b0f325c684e52ba41834a57431b4128e,
         type: 2}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82328757117422572, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2618c6f322b645d4099ba678678c9821, type: 3}
+    - target: {fileID: 82678643125527004, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82254255264750020, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: Priority
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 82845940732746124, guid: b0f325c684e52ba41834a57431b4128e,
         type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
+      propertyPath: Priority
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82678643125527004, guid: b0f325c684e52ba41834a57431b4128e,
+    - target: {fileID: 82328757117422572, guid: b0f325c684e52ba41834a57431b4128e,
         type: 2}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
+      propertyPath: Priority
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114112568483612356, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: engine
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 82328757117422572, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &249253889
@@ -597,7 +618,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
