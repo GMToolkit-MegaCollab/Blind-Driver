@@ -134,6 +134,9 @@ public class GPS : PassengerController2 {
         if (Vector2.Angle(segNow, transform.forward) > 90) {
             uTurn.Trigger(5);
             return;
+        } else if (Vector2.Angle(segNow, transform.forward) > 30) {
+            segAfter = segNow;
+            segNow = transform.forward * 0.5f;
         }
 
         Debug.DrawRay(transform.position - Vector3.forward + (Vector3)segNow, segAfter, Color.red);
