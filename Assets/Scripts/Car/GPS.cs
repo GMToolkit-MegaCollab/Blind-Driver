@@ -152,7 +152,7 @@ public class GPS : PassengerController2 {
         if (lines != null) {
             if (Mathf.Abs(segNow.magnitude - 10) < 1) {
                 lines[0].Trigger(5);
-            } else if (segNow.magnitude < 3) {
+            } else if (segNow.magnitude < 1) {
                 lines[1].Trigger(5);
             }
         }
