@@ -320,6 +320,8 @@ GameObject:
   m_Component:
   - component: {fileID: 355947536}
   - component: {fileID: 355947535}
+  - component: {fileID: 355947538}
+  - component: {fileID: 355947540}
   - component: {fileID: 355947537}
   - component: {fileID: 355947539}
   - component: {fileID: 355947538}
@@ -453,6 +455,23 @@ MonoBehaviour:
   rigidbody: {fileID: 355947537}
   wheelFriction: 10
   engineAcceleration: 5
+--- !u!114 &355947540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 355947534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc0d07b5f4d3414e942364ae28d2a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 1
+  LookAhead: 1
+  CubeMagnifier: 1
+  DeltaAngle: 40
+  BoxSize: 0.5
+  passenger: {fileID: 1422091555}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,8 +701,7 @@ GameObject:
   - component: {fileID: 753256301}
   - component: {fileID: 753256300}
   - component: {fileID: 753256299}
-  - component: {fileID: 753256302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Test Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,6 +1011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1422091553}
   - component: {fileID: 1422091554}
+  - component: {fileID: 1422091555}
   m_Layer: 0
   m_Name: Passenger
   m_TagString: Untagged
@@ -1109,6 +1128,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1422091555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422091552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c50125742f7974c94014f528691227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastVoiceLineStarted: {fileID: 0}
+  audioSource: {fileID: 1422091554}
+  passenger: {fileID: 11400000, guid: 11b27bff95a3dd44e9d88ab3e6529744, type: 2}
+  emotion: 0
 --- !u!1 &1590005719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: 0
   Intensity: 1
-  Reciever: {fileID: 0}
+  Reciever: {fileID: 1422091555}
 --- !u!61 &1590005722
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1279,7 +1313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1950892067
 Transform:
   m_ObjectHideFlags: 0
@@ -1339,7 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: 1
   Intensity: 1
-  Reciever: {fileID: 0}
+  Reciever: {fileID: 1422091555}
 --- !u!61 &2028544982
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1408,7 +1442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Position: 2
   Intensity: 1
-  Reciever: {fileID: 0}
+  Reciever: {fileID: 1422091555}
 --- !u!61 &2033070787
 BoxCollider2D:
   m_ObjectHideFlags: 0

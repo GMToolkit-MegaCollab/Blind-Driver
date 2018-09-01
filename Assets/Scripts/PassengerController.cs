@@ -15,8 +15,8 @@ public class PassengerController : MonoBehaviour {
         Neutral,
         Pissed
     }
-
-    public void BumperCall(Bumper.Direction direction, Bumper.IntensityLevel intensity)
+    
+    public void BumperCall(Bumpers.Direction direction, Bumpers.IntensityLevel intensity)
     {
         Debug.Log("BumperCall");
 
@@ -25,13 +25,12 @@ public class PassengerController : MonoBehaviour {
         Passenger.Directions sound_pool = null;
         switch (intensity)
         {
-            case Bumper.IntensityLevel.Moderate:
+            case Bumpers.IntensityLevel.Moderate:
                 break;
-            case Bumper.IntensityLevel.Intense:
+            case Bumpers.IntensityLevel.Intense:
                 sound_pool = passenger.intense;
-                Debug.Log("Intense");
                 break;
-            case Bumper.IntensityLevel.Extreme:
+            case Bumpers.IntensityLevel.Extreme:
 
                 break;
         }
@@ -39,13 +38,13 @@ public class PassengerController : MonoBehaviour {
         if (sound_pool == null) return;
 
         switch (direction) {
-            case Bumper.Direction.Front:
+            case Bumpers.Direction.Front:
                 PlaySound(sound_pool.front);
                 break;
-            case Bumper.Direction.Right:
+            case Bumpers.Direction.Right:
                 PlaySound(sound_pool.right);
                 break;
-            case Bumper.Direction.Left:
+            case Bumpers.Direction.Left:
                 PlaySound(sound_pool.left);
                 break;
         }
@@ -53,6 +52,7 @@ public class PassengerController : MonoBehaviour {
 
     public void PlaySound(AudioClip[] clips)
     {
-        audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+        if(!audioSource.isPlaying)
+            audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
     }
 }
