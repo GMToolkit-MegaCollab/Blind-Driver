@@ -53,7 +53,7 @@ public class VoiceLine : MonoBehaviour {
     protected virtual void Tick() { }
     public virtual void OnCollide(Collision2D collision) { }
 
-    protected bool Trigger(float cooldown = 0) {
+    public bool Trigger(float cooldown = 0) {
 
         if (audioClipDictionary.Count == 0) {
             Debug.LogWarning("No audio clips");
