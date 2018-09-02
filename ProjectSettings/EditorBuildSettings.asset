@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Setup.unity
     guid: 219d1dcafb0c29949ae795025742fd65
   - enabled: 1
-    path: Assets/Scenes/TrolledWoods.unity
-    guid: 93ac7d322d23ba244947b08a42a8ffc1
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/Tutorial.unity
+    guid: 4a7a20a0ee115e1449f0eadea9f48563
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: d88a7838a7e485541aa28fec2ed2122c
   m_configObjects: {}

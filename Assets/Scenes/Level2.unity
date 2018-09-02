@@ -196,8 +196,19 @@ Prefab:
       propertyPath: audioClips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 6ae03aef9c4e64b46b434fddb47583ef, type: 3}
+    - target: {fileID: 114112568483612356, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: engine
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 82678643125527004, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114359189257997452, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
+    - {fileID: 82328757117422572, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &148495463
@@ -638,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec6591b53785f342ad7e2b8f2ee5c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevel: 1
+  NextLevel: 4
 --- !u!1001 &2046378065
 Prefab:
   m_ObjectHideFlags: 0
