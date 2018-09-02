@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c9aa732b8000743a49827bb0ef7623, type: 3}
+  m_Name: PassengerData
+  m_EditorClassIdentifier: 
+  Name: Test
+  Wall:
+    left:
+    - {fileID: 8300000, guid: be861ff4b9d0709419f520013181043c, type: 3}
+    right:
+    - {fileID: 8300000, guid: 4c98e4a9a06f34e44958e0d6dd4a1ca3, type: 3}
+    front:
+    - {fileID: 8300000, guid: 2220efc31c269e340920ca3644fe3764, type: 3}
+  StartSequence:
+  - {fileID: 8300000, guid: 9932c7622c18af941a6e4e30fd339a7b, type: 3}
+  - {fileID: 8300000, guid: 38c2a7df158630741aa9406505b02476, type: 3}
+  - {fileID: 8300000, guid: 2d88720f5ce86414eabe467801f476eb, type: 3}
+  TriggerResponses: []
+  DistanceResponses: []
+  EndSequence: []

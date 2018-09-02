@@ -19,7 +19,7 @@ public class GPS : PassengerController2 {
     public Vector2[] Path;
 
     public VoiceLine uTurn;
-    public VoiceLine startingNavigation;
+    public AudioClip start;
 
     public VoiceLine[] right;
     public VoiceLine[] left;
@@ -103,8 +103,8 @@ public class GPS : PassengerController2 {
         UpdatePath();
 
         //also start that one audio cue
-        startingNavigation.audioClipDictionary[Emotion.Neutral] = Combine(startingNavigation.audioClipDictionary[Emotion.Neutral], digits[1]);
-        startingNavigation.Trigger();
+        start = Combine(start, digits[1]);
+        Play(start);
     }
 
     void Update() {
@@ -198,40 +198,6 @@ public class GPS : PassengerController2 {
         distance = 0f;
         for (int i = 0; i < path.corners.Length; i++) Path[i] = new Vector2(path.corners[i].x, path.corners[i].z);
         for (int i = 1; i < path.corners.Length; i++) distance += Mathf.Sqrt((Path[i].x - Path[i - 1].x) * (Path[i].x - Path[i - 1].x) + (Path[i].y - Path[i - 1].y) * (Path[i].y - Path[i - 1].y));
-    }
-
-    public static AudioClip Combine(params AudioClip[] clips) {
-        if (clips == null || clips.Length == 0)
-            return null;
-
-        int length = 0;
-        for (int i = 0; i < clips.Length; i++) {
-            if (clips[i] == null)
-                continue;
-
-            length += clips[i].samples * clips[i].channels;
-        }
-
-        float[] data = new float[length];
-        length = 0;
-        for (int i = 0; i < clips.Length; i++) {
-            if (clips[i] == null)
-                continue;
-
-            float[] buffer = new float[clips[i].samples * clips[i].channels];
-            clips[i].GetData(buffer, 0);
-            buffer.CopyTo(data, length);
-            length += buffer.Length;
-        }
-
-        if (length == 0)
-            return null;
-
-        //AudioClip result = AudioClip.Create("Combine", length / 2, 2, clips[0].frequency, false); //stereo
-        AudioClip result = AudioClip.Create("Combine", length, 1, clips[0].frequency, false); //mono
-        result.SetData(data, 0);
-
-        return result;
     }
 }
 
