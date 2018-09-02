@@ -372,7 +372,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1536780723120512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.73, y: 12.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4535552814107784}
@@ -1213,7 +1213,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8caa755e4df396a4fa82b777e437cdd8, type: 3}
   - {fileID: 8300000, guid: adaf27b3b14d1eb47b50be4d5a219c98, type: 3}
   - {fileID: 8300000, guid: 8027959f83a31364cb7cbbb46080d5b2, type: 3}
-  car_to_assist: {fileID: 0}
   correction_threshhold: 15
   correction_time: 1
   min_time_since_turn: 1

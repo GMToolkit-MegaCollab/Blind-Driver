@@ -16,7 +16,7 @@ public class SoundCamera : MonoBehaviour {
 		if (soundCamera == null) {
 			soundCamera = this;
 		} else if (soundCamera != this) {
-			Destroy(this.transform.parent.gameObject);
+			Destroy(this.transform.gameObject);
 			throw new System.Exception("Error: Duplicate Sound rendering scene.");
 		}
 		this.camera = this.GetComponent<Camera>();
@@ -37,9 +37,8 @@ public class SoundCamera : MonoBehaviour {
 		canvas.gameObject.layer = 5;
 		c.transform.localPosition = new Vector3(0f,0f,100f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void OnDestroy() {
+		if (soundCamera == this) soundCamera = null;
 	}
 }
