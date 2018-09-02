@@ -24,7 +24,9 @@ public class PassengerData : ScriptableObject {
 
     public string Name;
 
+	public Directions Wall;
 	public AudioClip[] StartSequence;
 	public TriggerClip[] TriggerResponses;
 	public DistanceClip[] DistanceResponses;
+	public AudioClip[] EndSequence;
 }

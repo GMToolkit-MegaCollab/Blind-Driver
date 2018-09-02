@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PassengerController2 : MonoBehaviour {
     public AudioSource audioSource;
     public VoiceLine lastVoiceLineStarted;
@@ -14,11 +15,11 @@ public class PassengerController2 : MonoBehaviour {
         Neutral = 0
     }
 
-    void Start () {
+    void Awake() {
 		
 	}
 
-	void Update () {
+	void Update() {
 		
 	}
 }
