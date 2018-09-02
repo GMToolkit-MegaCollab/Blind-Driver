@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Car : MonoBehaviour {
 
+    public AudioClip crashSound;
     public AudioSource tire_sounds;
+    public AudioSource engine;
     public new Rigidbody2D rigidbody;
-    public float volume_scale;
 
     // Maybe have integer of how much velocity the car has an increase it by one or decrease by one 
     // when buttons are pressed
@@ -16,14 +17,17 @@ public class Car : MonoBehaviour {
     public float wheelFriction = 10;
     public float engineAcceleration = 1;
 
+<<<<<<< HEAD
     void Start() {
         volume_scale = tire_sounds.volume;
     }
 
+=======
+>>>>>>> origin/master
     void FixedUpdate() {
 
         bool brakes = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0);
-        rigidbody.MoveRotation(rigidbody.rotation - rigidbody.velocity.magnitude * Time.deltaTime * Input.GetAxisRaw("Horizontal") * 60);
+        rigidbody.MoveRotation(rigidbody.rotation - transform.InverseTransformVector(rigidbody.velocity).x * Time.deltaTime * Input.GetAxisRaw("Horizontal") * 60);
         Vector2 targetVelocity = brakes ? Vector2.zero : (Vector2)Vector3.ProjectOnPlane(rigidbody.velocity, transform.up);
         Vector2 delta = targetVelocity - rigidbody.velocity;
         float skid = delta.magnitude - Time.deltaTime * wheelFriction;
@@ -33,7 +37,10 @@ public class Car : MonoBehaviour {
         if (!brakes)
             rigidbody.AddForce(transform.right * rigidbody.mass * Input.GetAxisRaw("Vertical") * Time.deltaTime * engineAcceleration, ForceMode2D.Impulse);
 
-        tire_sounds.volume = rigidbody.velocity.magnitude * volume_scale;
+        if (tire_sounds != null)
+            tire_sounds.volume = rigidbody.velocity.magnitude;
+        if (engine != null)
+            engine.volume = Mathf.Abs(Input.GetAxis("Vertical"));
 
         //todo: change engine noise based on Input.GetAxisRaw("Vertical")
         //todo: play steering wheel noise based on Input.GetAxisRaw("Vertical")
@@ -44,7 +51,10 @@ public class Car : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         PassOnCollisionEnter2DToChildren(transform, collision);
-        //todo: make crash noise
+        if (crashSound != null) {
+            foreach (var contact in collision.contacts)
+                AudioSource.PlayClipAtPoint(crashSound, contact.point, contact.relativeVelocity.magnitude);
+        }
     }
 
     private void PassOnCollisionEnter2DToChildren(Transform t, Collision2D collision) {
@@ -56,7 +66,7 @@ public class Car : MonoBehaviour {
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    /*void OnTriggerStay2D(Collider2D other)
     {
         // See if that's a road surface, and if it is, play sounds
         Surface s = other.gameObject.GetComponent<Surface>();
@@ -65,5 +75,5 @@ public class Car : MonoBehaviour {
             tire_sounds.clip = s.sound;
             tire_sounds.Play();
         }
-    }
+    }*/
 }
