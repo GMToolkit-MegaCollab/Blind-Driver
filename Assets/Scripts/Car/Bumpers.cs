@@ -70,13 +70,12 @@ public class Bumpers : MonoBehaviour
         }
 	}
 
-    void OnDrawGizmos()
-    {
+#if UNITY_EDITOR
+    void OnDrawGizmos() {
         if (rb2d == null) return;
 
         Vector2 localVel = transform.InverseTransformDirection(rb2d.velocity);
-        if (localVel.x > 0)
-        {
+        if (localVel.x > 0) {
             Gizmos.DrawLine(rb2d.position,
                 rb2d.position +
                 (Vector2)(Quaternion.Euler(0, 0, rb2d.rotation) *
@@ -91,4 +90,5 @@ public class Bumpers : MonoBehaviour
                 Vector2.right * LookAhead * localVel.x));
         }
     }
+#endif
 }

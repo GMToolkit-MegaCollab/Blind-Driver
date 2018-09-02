@@ -9,6 +9,7 @@ public class SoundIconSpriteBook : ScriptableObject {
 	
 	public Sprite GPS;
 	public Sprite Passenger;
+	public Sprite Crash;
 
     public IconClip[] iconCatalog;
 }

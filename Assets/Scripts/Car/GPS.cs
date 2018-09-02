@@ -167,8 +167,7 @@ public class GPS : PassengerController2 {
         }
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         if (Path == null || Path.Length < 1)
             return;
 
@@ -177,17 +176,13 @@ public class GPS : PassengerController2 {
         Vector2 wanted_angle = Path[1] - (Vector2)transform.position;
         Vector2 current_angle = transform.parent.rotation * Vector2.right;
 
-        if (Vector2.Angle(wanted_angle, current_angle) < correction_threshhold)
-        {
+        if (Vector2.Angle(wanted_angle, current_angle) < correction_threshhold) {
             Debug.Log("In threshhold");
             correction_timer += Time.deltaTime;
-            if (correction_timer > correction_time && car_to_assist.time_since_turn > min_time_since_turn)
-            {
+            if (correction_timer > correction_time && car_to_assist.time_since_turn > min_time_since_turn) {
                 car_to_assist.rigidbody.MoveRotation(Vector2.SignedAngle(Vector2.right, wanted_angle));
             }
-        }
-        else
-        {
+        } else {
             Debug.Log("Outside threshhold");
             correction_timer = 0;
         }
@@ -246,4 +241,5 @@ public class GPS : PassengerController2 {
  *Programming: IQuick 143, TrolledWoods, Thunderous Echo
  *Organization: Meesto, IQuick 143, TrolledWoods
  *Voice + sounds: Meesto, TheBasementNerd
+ *Art: RasmusTOP, ÜberUser
  */

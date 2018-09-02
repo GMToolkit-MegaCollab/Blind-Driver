@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
 public class Car : MonoBehaviour {
 
     public AudioClip crashSound;
@@ -13,9 +17,10 @@ public class Car : MonoBehaviour {
     // when buttons are pressed
     // Then try and adjust velocity to fit this speed
 
-    // Public so that you can edit them in the editor
-    public float wheelFriction = 10;
-    public float engineAcceleration = 1;
+    [SerializeField]
+    private float wheelFriction = 10;
+	[SerializeField]
+    private float engineAcceleration = 1;
 
     public float time_since_turn = 0f;
 
@@ -61,8 +66,7 @@ public class Car : MonoBehaviour {
         }
     }
 
-    public void RotateCar(float rotation)
-    {
+    public void RotateCar(float rotation) {
         if (rotation != 0) time_since_turn = 0;
         rigidbody.MoveRotation(rigidbody.rotation - transform.InverseTransformVector(rigidbody.velocity).x * Time.deltaTime * rotation * 60);
     }
