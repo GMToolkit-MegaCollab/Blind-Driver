@@ -180,7 +180,7 @@ public class GPS : PassengerController2 {
 
         if (Vector2.Angle(wanted_angle, current_angle) < correction_threshhold) {
             correction_timer += Time.deltaTime;
-            if (correction_timer > correction_time && car_to_assist.time_since_turn > min_time_since_turn) {
+            if (correction_timer > correction_time) {
                 car_to_assist.rigidbody.MoveRotation(Vector2.SignedAngle(Vector2.right, wanted_angle));
             }
         } else {

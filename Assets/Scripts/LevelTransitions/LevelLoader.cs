@@ -10,7 +10,7 @@ public class LevelLoader : MonoBehaviour {
 
     public static float transition = 0f;
     public static int next_level = 2;
-    public float transition_time = 5f;
+    public float transition_time = 15f;
 
 	// Use this for initialization
 	void Awake () {
@@ -39,6 +39,7 @@ public class LevelLoader : MonoBehaviour {
 
     public void LoadLevel(int next_level)
     {
+		transition = 0;
         LevelLoader.next_level = next_level;
     }
 }
