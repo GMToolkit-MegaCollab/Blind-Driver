@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RenderedAudioSource))]
 [RequireComponent(typeof(AudioSource))]
 public class PassengerController2 : MonoBehaviour {
     public new LinkedList<AudioSource> audio = new LinkedList<AudioSource>();
     public VoiceLine lastVoiceLineStarted;
+	private RenderedAudioSource render;
 
 	void Awake() {
 		audio.AddLast(this.GetComponent<AudioSource>());
+		render = this.GetComponent<RenderedAudioSource>();
 	}
 
 	protected void Update() {
 		if (!audio.Last.Value.isPlaying && audio.Count > 1) {
 			audio.RemoveLast();
 			audio.Last.Value.UnPause();
+			if (render != null) render.ChangeSource(audio.Last.Value);
 		}
 	}
 
@@ -24,6 +28,9 @@ public class PassengerController2 : MonoBehaviour {
 			source.Pause();
 			audio.AddLast(this.gameObject.AddComponent<AudioSource>());
 			source = audio.Last.Value;
+			source.playOnAwake = false;
+			source.spatialBlend = 1;
+			if (render != null) render.ChangeSource(audio.Last.Value);
 		}
 		source.clip = clip;
 		source.Play();

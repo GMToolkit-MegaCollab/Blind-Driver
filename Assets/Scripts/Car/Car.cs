@@ -66,13 +66,9 @@ public class Car : MonoBehaviour {
         }
     }
 
-	void OnTriggerStay2D(Collider2D other) {
-
-	}
-
-	private void PassOnTriggerEnter2DToChildren(Transform t, Collider2D other) {
+	void OnTriggerEnter2D(Collider2D other) {
 		this.BroadcastMessage("TriggerEnter", other);
-    }
+	}
 
     public void RotateCar(float rotation) {
         if (rotation != 0) time_since_turn = 0;

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class RenderedAudioSource : MonoBehaviour {
 
 	private bool started = false;
-	private new AudioSource audio;
+	protected new AudioSource audio;
 	private AudioListener listener;
 	private bool destroyOnFinish = false;
 	private SoundIcon icon;
@@ -16,13 +16,12 @@ public class RenderedAudioSource : MonoBehaviour {
 	//For measuring loudness
 	private float timeSinceMeasurement = 0f;
 	private float measureUpdateStep = 0.1f;
-	private int sampleDataLength = 1024;
+	private int sampleDataLength = 512;
 
-    void Awake()
-    {
-        if (SoundIconSpriteManager.instance == null)
-        {
+    void Awake() {
+        if (SoundIconSpriteManager.instance == null) {
             LevelLoader.next_level = -1;
+			//???
             SceneManager.LoadScene(1, LoadSceneMode.Additive);
         }
     }
@@ -70,6 +69,10 @@ public class RenderedAudioSource : MonoBehaviour {
 
 	void DestroyIcon() {
 		if (icon != null) icon.Remove();
+	}
+
+	public void ChangeSource(AudioSource newSource) {
+		this.audio = newSource;
 	}
 	
 	public static Vector4 ToV4(Vector3 x) {
