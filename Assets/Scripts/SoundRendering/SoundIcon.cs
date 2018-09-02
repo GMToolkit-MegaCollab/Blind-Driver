@@ -13,8 +13,8 @@ public class SoundIcon : MonoBehaviour {
 	[SerializeField]
 	public Sprite iconImage;
 
-	private static float border = 1.5f;
-	private static float iconscale = 10f;
+	private static float border = 42f;
+	private static float iconscale = 40f;
 
 	//the ratio of Bracket or Arrow size/Icon size larger value = larger Brackets/Arrows
 	private static float typeIndicatorScale = 2.5f;
@@ -84,7 +84,7 @@ public class SoundIcon : MonoBehaviour {
 		Vector3 canvasspace = new Vector3(intersection.x / SoundCamera.soundCamera.canvas.scaleFactor, intersection.y / SoundCamera.soundCamera.canvas.scaleFactor, 0f);
 
 		//clamp value
-		Vector2 clamping = SoundCamera.soundCamera.canvas.GetComponent<RectTransform>().sizeDelta / 2f - 10 * Brackets.GetComponent<RectTransform>().rect.size / SoundCamera.soundCamera.canvas.scaleFactor;
+		Vector2 clamping = SoundCamera.soundCamera.canvas.GetComponent<RectTransform>().sizeDelta / 2f - Vector2.one * border / SoundCamera.soundCamera.canvas.scaleFactor;
 		Vector3 clampedspace = new Vector3(Mathf.Clamp(canvasspace.x, -clamping.x, clamping.x), Mathf.Clamp(canvasspace.y, -clamping.y, clamping.y), 0f);
 		
 		if ((canvasspace - clampedspace).magnitude <= 0.5f) {

@@ -21,6 +21,7 @@ public class SoundCamera : MonoBehaviour {
 		}
 		this.camera = this.GetComponent<Camera>();
 		this.camera.cullingMask = 1 << 5;
+		this.camera.backgroundColor = Color.black;
 		GameObject root = new GameObject("Root");
 		this.transform.SetParent(root.transform);
 		this.transform.parent.position = Vector3.zero;

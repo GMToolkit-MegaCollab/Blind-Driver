@@ -24,8 +24,6 @@ public class SoundIconSpriteManager : MonoBehaviour {
 	public Sprite GetIconForClip(AudioClip clip) {
 		Sprite icon = null;
 		iconDictionary.TryGetValue(clip.samples, out icon);
-		
-		Debug.Log("aaa"+clip.samples);
 		return icon; 
 	}
 }

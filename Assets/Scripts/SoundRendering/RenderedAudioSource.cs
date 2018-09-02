@@ -10,9 +10,10 @@ public class RenderedAudioSource : MonoBehaviour {
 	private AudioListener listener;
 	private bool destroyOnFinish = false;
 	private SoundIcon icon;
+	protected Sprite overrideIcon = null;
 	private bool triedIcon = false;
 
-	void Start () {
+	protected void Start () {
 		if (started) return;
 		audio = this.GetComponent<AudioSource>();
 		listener = FindObjectOfType<AudioListener>();
@@ -31,10 +32,9 @@ public class RenderedAudioSource : MonoBehaviour {
 		}
 	}
 
-	void PlayClip(AudioClip clip, bool destroyOnFinish = false) {
-		this.destroyOnFinish = destroyOnFinish;
-		this.audio.clip = clip;
+	void PlayClip(AudioClip clip) {
 		Start();
+		this.audio.clip = clip;
 		CreateIcon();
 	}
 
@@ -43,9 +43,10 @@ public class RenderedAudioSource : MonoBehaviour {
 			triedIcon = false;
 			return;
 		}
-		Sprite iconImage = SoundIconSpriteManager.instance.GetIconForClip(audio.clip);
+		Sprite iconImage = overrideIcon;
+		if (iconImage == null) iconImage = SoundIconSpriteManager.instance.GetIconForClip(audio.clip);
 		if (iconImage != null) {
-			GameObject o = new GameObject("icon", new System.Type[] {typeof(SoundIcon)});
+			GameObject o = new GameObject("Icon", new System.Type[] {typeof(SoundIcon)});
 			this.icon = o.GetComponent<SoundIcon>();
 			this.icon.iconImage = iconImage;
 		}
