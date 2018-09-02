@@ -315,6 +315,130 @@ MonoBehaviour:
   audioClips:
   - emotion: 0
     audioClip: {fileID: 0}
+--- !u!1 &786861977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 786861978}
+  - component: {fileID: 786861979}
+  m_Layer: 0
+  m_Name: Tiresounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &786861978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 786861977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.353, y: 0, z: 0.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1202061009}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &786861979
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 786861977}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1202061004
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42008f2c78f44b542a77289178be823f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tire_sounds: {fileID: 786861979}
   rigidbody: {fileID: 1202061007}
+  volume_scale: 0
+  wheelFriction: 10
+  engineAcceleration: 1
 --- !u!50 &1202061007
 Rigidbody2D:
   serializedVersion: 4
@@ -451,6 +579,7 @@ Transform:
   - {fileID: 1617046276}
   - {fileID: 2054084262}
   - {fileID: 1364137389}
+  - {fileID: 786861978}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -738,6 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c975f66a45eac545a9860f08a2207f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 0
   Path: []
 --- !u!82 &1364137391
 AudioSource:
@@ -847,6 +977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastVoiceLineStarted: {fileID: 0}
   audioSource: {fileID: 1364137391}
+  passenger: {fileID: 0}
   emotion: 0
 --- !u!1 &1617046275
 GameObject:
@@ -857,6 +988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617046276}
   - component: {fileID: 1617046277}
+  - component: {fileID: 1617046278}
   m_Layer: 0
   m_Name: Driver
   m_TagString: Untagged
@@ -884,6 +1016,17 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1617046275}
   m_Enabled: 1
+--- !u!114 &1617046278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1617046275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed4234a45f0d0e409ed237786ad2d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1758885379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,4 +1349,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastVoiceLineStarted: {fileID: 0}
   audioSource: {fileID: 2054084263}
+  passenger: {fileID: 0}
   emotion: 0

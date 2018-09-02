@@ -16,8 +16,7 @@ public class Car : MonoBehaviour {
     public float wheelFriction = 10;
     public float engineAcceleration = 1;
 
-    void Start()
-    {
+    void Start() {
         volume_scale = tire_sounds.volume;
     }
 
