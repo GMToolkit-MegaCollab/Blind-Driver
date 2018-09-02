@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c9aa732b8000743a49827bb0ef7623, type: 3}
+  m_Name: John
+  m_EditorClassIdentifier: 
+  Name: 
+  Wall:
+    left: []
+    right: []
+    front:
+    - {fileID: 8300000, guid: 843c9e911c8fad742960ee9c1806e482, type: 3}
+  StartSequence:
+  - {fileID: 8300000, guid: 5abd223462e084043b6e9706cce93155, type: 3}
+  TriggerResponses:
+  - clip: {fileID: 8300000, guid: 9bbe9c3e28667f740b3994c17393485a, type: 3}
+    reapeatable: 0
+  - clip: {fileID: 8300000, guid: 279ef59bfb0771e46891cafc5bcfb6fc, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: bd5e88d3c23ee5e49a1de691a14c5e1a, type: 3}
+    reapeatable: 1
+  DistanceResponses: []
+  EndSequence:
+  - {fileID: 8300000, guid: 3c45fb444b3c849419799c2455bb7cdd, type: 3}

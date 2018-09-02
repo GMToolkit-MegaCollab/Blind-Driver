@@ -22,7 +22,9 @@ MonoBehaviour:
     front:
     - {fileID: 8300000, guid: 19c072999a837d541b74edcb421fe4d7, type: 3}
     - {fileID: 8300000, guid: 6e454cf1a0e5e924b88daaf53935e129, type: 3}
+    - {fileID: 8300000, guid: 5a49de932a85f4c44b19c241a56904cf, type: 3}
   StartSequence:
+  - {fileID: 8300000, guid: 26b300d19b2e3484caff0d44824ac172, type: 3}
   - {fileID: 8300000, guid: cc536c2702e74fa4591b7d5cf7dcffb3, type: 3}
   TriggerResponses:
   - clip: {fileID: 8300000, guid: 9932c7622c18af941a6e4e30fd339a7b, type: 3}
