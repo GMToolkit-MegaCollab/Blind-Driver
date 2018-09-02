@@ -11,12 +11,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c9aa732b8000743a49827bb0ef7623, type: 3}
   m_Name: Instructor
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Instr
   Wall:
     left: []
     right: []
     front: []
-  StartSequence: []
-  TriggerResponses: []
+  StartSequence:
+  - {fileID: 8300000, guid: a13251924bc14e64fb084331dab2ab62, type: 3}
+  TriggerResponses:
+  - clip: {fileID: 8300000, guid: 393039f848111b14eb3cd2b8ee5f3f16, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 786b1a22ab23a4d46a9a1936d36fc7bf, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 677f89da767ee7e4683c9b759a9497bf, type: 3}
+    reapeatable: 0
   DistanceResponses: []
-  EndSequence: []
+  EndSequence:
+  - {fileID: 8300000, guid: b87ba0fce01fcfd4f9e098f44f2a7cc1, type: 3}
