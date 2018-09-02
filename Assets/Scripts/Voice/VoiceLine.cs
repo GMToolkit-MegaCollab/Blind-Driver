@@ -7,36 +7,15 @@ public class VoiceLine : MonoBehaviour {
     public int priority;
     [HideInInspector]
     public PassengerController2 passenger;
-    private float cooldown = 0;
-    [HideInInspector]
-    public Dictionary<PassengerController2.Emotion, AudioClip> audioClipDictionary;
-
-    [System.Serializable]
-    public struct EmotionalAudioClip {
-        public PassengerController2.Emotion emotion;
-        public AudioClip audioClip;
-    }
-    public EmotionalAudioClip[] audioClips = { new EmotionalAudioClip { } };
+    private float cooldown = 0f;
+	public AudioClip[] audioClips;
 
     private void Awake() {
-        audioClipDictionary = new Dictionary<PassengerController2.Emotion, AudioClip>();
-        foreach (EmotionalAudioClip e in audioClips) {
-            if (audioClipDictionary.ContainsKey(e.emotion)) {
-                Debug.LogWarning("Duplicate emotion ignored");
-                continue;
-            }
-            if (e.audioClip == null) {
-                Debug.LogWarning("Missing audio clip ignored");
-                continue;
-            }
-            audioClipDictionary.Add(e.emotion, e.audioClip);
-        }
-        if (audioClipDictionary.Count == 0)
+        if (audioClips.Length == 0)
             Debug.LogWarning("No audio clips");
         passenger = GetPassenger(transform.parent);
         if (passenger == null)
             Debug.LogWarning("No associated passenger");
-        audioClips = null;
     }
 
     PassengerController2 GetPassenger(Transform t) {
@@ -58,8 +37,8 @@ public class VoiceLine : MonoBehaviour {
 
         if (this.cooldown > 0)
             return false;
-
-        if (audioClipDictionary.Count == 0) {
+		Debug.Log(gameObject.name);
+        if (audioClips.Length == 0) {
             Debug.LogWarning("No audio clips");
             return false;
         }
@@ -69,22 +48,10 @@ public class VoiceLine : MonoBehaviour {
             return false;
         }
 
-        if (passenger.audioSource.isPlaying) {
-            if (passenger.lastVoiceLineStarted != null && passenger.lastVoiceLineStarted.priority >= priority)
-                return false;
-        }
-
-        AudioClip audioClip;
-        if (audioClipDictionary.TryGetValue(passenger.emotion, out audioClip)) {
-
-        } else if (audioClipDictionary.TryGetValue(PassengerController2.Emotion.Neutral, out audioClip)) {
-
-        } else {
-            audioClip = new List<AudioClip>(audioClipDictionary.Values)[0];
-        }
-
-        passenger.audioSource.clip = audioClip;
-        passenger.audioSource.Play();
+		//Play random clip
+        AudioClip audioClip = audioClips[Random.Range(0, audioClips.Length)];
+		if (audioClip == null) return false;
+        passenger.Play(audioClip);
         passenger.lastVoiceLineStarted = this;
         this.cooldown = cooldown + audioClip.length;
         return true;

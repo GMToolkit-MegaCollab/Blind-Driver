@@ -7,8 +7,6 @@ public class Whisker : VoiceLine {
     public float y;
 
 	protected override void Tick () {
-        if (passenger.audioSource.isPlaying && passenger.lastVoiceLineStarted != null && passenger.lastVoiceLineStarted.priority > priority)
-            return;
         var car = passenger.transform.parent;
         var v = car.GetComponent<Rigidbody2D>().velocity;
         Vector2 o = v.normalized + (Vector2)car.up * y;
