@@ -133,12 +133,12 @@ public class GPS : PassengerController2 {
         Vector2 segAfter = Path[ind + 1] - Path[ind];
 
         if (segNow.magnitude < 0.5f) {
-            if (Vector2.Angle(segAfter, transform.forward) > 90)
+            if (Vector2.Angle(segAfter, transform.forward) > 120)
                 uTurn.Trigger(5);
             return;
         }
 
-        if (Vector2.Angle(segNow, transform.forward) > 90) {
+        if (Vector2.Angle(segNow, transform.forward) > 120) {
             uTurn.Trigger(5);
             return;
         } else if (Vector2.Angle(segNow, transform.forward) > 30) {

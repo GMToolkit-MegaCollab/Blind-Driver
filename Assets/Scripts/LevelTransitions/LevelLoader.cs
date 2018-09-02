@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour {
     public SpriteRenderer mask;
 
     public static float transition = 0f;
-    public static int next_level = 1;
+    public static int next_level = 2;
     public float transition_time = 0.5f;
 
 	// Use this for initialization
