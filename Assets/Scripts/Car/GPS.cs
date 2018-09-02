@@ -28,6 +28,12 @@ public class GPS : PassengerController2 {
 
     public AudioClip[] digits;
 
+    public Car car_to_assist;
+    public float correction_threshhold = 15f;
+    public float correction_time = 1f;
+    float correction_timer = 0f;
+    public float min_time_since_turn = 1f;
+
     //Load gameobjects and then create and bake a navmesh and also create a player navmesh agent
     void Start() {
         GameObject parent = new GameObject("Navmesh");
@@ -158,6 +164,32 @@ public class GPS : PassengerController2 {
             } else if (segNow.magnitude < 1) {
                 lines[1].Trigger(5);
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (Path == null || Path.Length < 1)
+            return;
+
+        // Steering assist
+        // Find difference between current angle and angle to next path node
+        Vector2 wanted_angle = Path[1] - (Vector2)transform.position;
+        Vector2 current_angle = transform.parent.rotation * Vector2.right;
+
+        if (Vector2.Angle(wanted_angle, current_angle) < correction_threshhold)
+        {
+            Debug.Log("In threshhold");
+            correction_timer += Time.deltaTime;
+            if (correction_timer > correction_time && car_to_assist.time_since_turn > min_time_since_turn)
+            {
+                car_to_assist.rigidbody.MoveRotation(Vector2.SignedAngle(Vector2.right, wanted_angle));
+            }
+        }
+        else
+        {
+            Debug.Log("Outside threshhold");
+            correction_timer = 0;
         }
     }
 

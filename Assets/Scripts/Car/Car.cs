@@ -17,10 +17,12 @@ public class Car : MonoBehaviour {
     public float wheelFriction = 10;
     public float engineAcceleration = 1;
 
-    void FixedUpdate() {
+    public float time_since_turn = 0f;
 
+    void FixedUpdate() {
+        time_since_turn += Time.deltaTime;
         bool brakes = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0);
-        rigidbody.MoveRotation(rigidbody.rotation - transform.InverseTransformVector(rigidbody.velocity).x * Time.deltaTime * Input.GetAxisRaw("Horizontal") * 60);
+        RotateCar(Input.GetAxisRaw("Horizontal"));
         Vector2 targetVelocity = brakes ? Vector2.zero : (Vector2)Vector3.ProjectOnPlane(rigidbody.velocity, transform.up);
         Vector2 delta = targetVelocity - rigidbody.velocity;
         float skid = delta.magnitude - Time.deltaTime * wheelFriction;
@@ -57,6 +59,12 @@ public class Car : MonoBehaviour {
                 voiceLine.OnCollide(collision);
             PassOnCollisionEnter2DToChildren(child, collision);
         }
+    }
+
+    public void RotateCar(float rotation)
+    {
+        if (rotation != 0) time_since_turn = 0;
+        rigidbody.MoveRotation(rigidbody.rotation - transform.InverseTransformVector(rigidbody.velocity).x * Time.deltaTime * rotation * 60);
     }
 
     /*void OnTriggerStay2D(Collider2D other) {

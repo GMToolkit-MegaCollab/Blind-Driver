@@ -152,6 +152,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114669768460411146, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: car_to_assist
+      value: 
+      objectReference: {fileID: 557720941}
+    - target: {fileID: 114669768460411146, guid: b0f325c684e52ba41834a57431b4128e,
+        type: 2}
+      propertyPath: correction_threshhold
+      value: 15.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f325c684e52ba41834a57431b4128e, type: 2}
   m_IsPrefabAsset: 0
@@ -269,6 +279,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &557720941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114112568483612356, guid: b0f325c684e52ba41834a57431b4128e,
+    type: 2}
+  m_PrefabInternal: {fileID: 127082185}
+  m_Script: {fileID: 11500000, guid: 42008f2c78f44b542a77289178be823f, type: 3}
 --- !u!1 &1280009076
 GameObject:
   m_ObjectHideFlags: 0
