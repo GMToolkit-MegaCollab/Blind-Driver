@@ -11,7 +11,11 @@ public class RenderedAudioSource : MonoBehaviour {
 	private bool destroyOnFinish = false;
 	private SoundIcon icon;
 	protected Sprite overrideIcon = null;
-	private bool triedIcon = false;
+
+	//For measuring loudness
+	private float timeSinceMeasurement = 0f;
+	private float measureUpdateStep = 0.1f;
+	private int sampleDataLength = 1024;
 
 	protected void Start () {
 		if (started) return;
@@ -24,8 +28,13 @@ public class RenderedAudioSource : MonoBehaviour {
 		if (audio.isPlaying) {
 			if (icon != null) {
 				icon.orientation = listener.transform.InverseTransformPoint(audio.transform.position);
+				timeSinceMeasurement += Time.deltaTime;
+				if (timeSinceMeasurement > measureUpdateStep) {
+					icon.loudness = GetLoudness();
+				}
 			} else {
 				CreateIcon();
+				timeSinceMeasurement = 0f;
 			}
 		} else if (icon != null) {
 			DestroyIcon();
@@ -39,10 +48,7 @@ public class RenderedAudioSource : MonoBehaviour {
 	}
 
 	void CreateIcon() {
-		if (SoundCamera.soundCamera == null) {
-			triedIcon = false;
-			return;
-		}
+		if (SoundCamera.soundCamera == null) return;
 		Sprite iconImage = overrideIcon;
 		if (iconImage == null) iconImage = SoundIconSpriteManager.instance.GetIconForClip(audio.clip);
 		if (iconImage != null) {
@@ -58,5 +64,15 @@ public class RenderedAudioSource : MonoBehaviour {
 	
 	public static Vector4 ToV4(Vector3 x) {
 		return new Vector4(x.x, x.y, x.z, 1);
+	}
+
+	private float GetLoudness() {
+		float[] clipSampleData = new float[sampleDataLength];
+		audio.GetOutputData(clipSampleData, 0);
+		float clipLoudness = 0f;
+		foreach (var sample in clipSampleData) {
+			clipLoudness += Mathf.Abs(sample);
+		}
+		return clipLoudness / sampleDataLength;
 	}
 }

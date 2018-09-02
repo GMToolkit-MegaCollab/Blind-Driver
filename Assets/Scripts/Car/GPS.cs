@@ -28,7 +28,7 @@ public class GPS : PassengerController2 {
 
     public AudioClip[] digits;
 
-    public Car car_to_assist;
+    private Car car_to_assist;
     public float correction_threshhold = 15f;
     public float correction_time = 1f;
     float correction_timer = 0f;
@@ -36,6 +36,7 @@ public class GPS : PassengerController2 {
 
     //Load gameobjects and then create and bake a navmesh and also create a player navmesh agent
     void Start() {
+		car_to_assist = this.transform.parent.GetComponent<Car>();
         GameObject parent = new GameObject("Navmesh");
         GameObject ground = new GameObject("Ground - Offroad", new System.Type[] { typeof(BoxCollider), typeof(NavMeshSurface) });
         ground.transform.localScale = new Vector3(100, 1, 100);

@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 4529994020685836}
   - component: {fileID: 82845940732746124}
   - component: {fileID: 114359189257997452}
+  - component: {fileID: 114987009828364434}
   m_Layer: 2
   m_Name: Passenger
   m_TagString: Untagged
@@ -219,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4411088526412118}
   - component: {fileID: 81351650894196198}
+  - component: {fileID: 114228869926914968}
   m_Layer: 2
   m_Name: Driver
   m_TagString: Untagged
@@ -236,6 +238,7 @@ GameObject:
   - component: {fileID: 4594694057817886}
   - component: {fileID: 82254255264750020}
   - component: {fileID: 114669768460411146}
+  - component: {fileID: 114826698375576892}
   m_Layer: 2
   m_Name: GPS
   m_TagString: Untagged
@@ -369,7 +372,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1536780723120512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 2, z: 0}
+  m_LocalPosition: {x: -21.73, y: 12.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4535552814107784}
@@ -399,7 +402,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621326994478622}
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.151, y: 0.085, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4219838144278000}
@@ -412,7 +415,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1280789152173890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0.15, y: -0.085, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4671226533123308}
@@ -480,7 +483,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685305583490212}
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.15, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0.2182, y: 0.0352, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4571105692863580}
@@ -1053,6 +1056,26 @@ MonoBehaviour:
   rigidbody: {fileID: 50159142111877124}
   wheelFriction: 10
   engineAcceleration: 1
+  time_since_turn: 0
+--- !u!114 &114228869926914968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621326994478622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed4234a45f0d0e409ed237786ad2d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 0
+  sensitivityX: 3
+  sensitivityY: 3
+  minX: -360
+  maxX: 360
+  minY: -60
+  maxY: 60
+  frameCounter: 10
 --- !u!114 &114235339666206846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1190,6 +1213,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8caa755e4df396a4fa82b777e437cdd8, type: 3}
   - {fileID: 8300000, guid: adaf27b3b14d1eb47b50be4d5a219c98, type: 3}
   - {fileID: 8300000, guid: 8027959f83a31364cb7cbbb46080d5b2, type: 3}
+  car_to_assist: {fileID: 0}
+  correction_threshhold: 15
+  correction_time: 1
+  min_time_since_turn: 1
 --- !u!114 &114701255858664438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1254,6 +1281,17 @@ MonoBehaviour:
   audioClips:
   - emotion: 0
     audioClip: {fileID: 8300000, guid: 6c57453d549a8e94a8482e9f49151fb4, type: 3}
+--- !u!114 &114826698375576892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685305583490212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080aa40e5f32f2b4597ecd303c7a4a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114836970110633622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1330,6 +1368,17 @@ MonoBehaviour:
   audioClips:
   - emotion: 0
     audioClip: {fileID: 8300000, guid: fca89607121347a4490bbd7a5bcaaa02, type: 3}
+--- !u!114 &114987009828364434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1280789152173890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a3e855611ea7448b73656eabe12af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212442136829517552
 SpriteRenderer:
   m_ObjectHideFlags: 1
