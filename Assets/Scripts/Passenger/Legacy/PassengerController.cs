@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PassengerController : MonoBehaviour {
 
-    [HideInInspector]
+    /*[HideInInspector]
     public VoiceLine lastVoiceLineStarted;
     public AudioSource audioSource;
 
     public GPS gps;
-
-    public Passenger passenger;
+    public PassengerData passenger;
 
     public Emotion emotion;
     public enum Emotion {
@@ -110,5 +109,5 @@ public class PassengerController : MonoBehaviour {
     {
         if(!audioSource.isPlaying)
             audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)]);
-    }
+    }*/
 }

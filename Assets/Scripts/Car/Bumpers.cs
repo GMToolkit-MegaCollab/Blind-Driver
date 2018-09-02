@@ -46,7 +46,7 @@ public class Bumpers : MonoBehaviour
                 rb2d.position,
                 Quaternion.Euler(0, 0, rb2d.rotation + DeltaAngle) * Vector2.right,
                 LookAhead * localVel.x, 1 << 8).transform != null;
-
+			/*
             // If it hits, calculate how the passenger suggests you avoid it
             if (front_hit || right_hit || left_hit)
             {
@@ -67,6 +67,7 @@ public class Bumpers : MonoBehaviour
                     passenger.BumperCall(Direction.Left, intensity);
                 }
             }
+			*/
         }
 	}
 

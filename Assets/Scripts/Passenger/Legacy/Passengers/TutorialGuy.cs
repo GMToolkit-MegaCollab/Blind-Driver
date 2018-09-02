@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialGuy : PassengerController2 {
-    public enum States
-    {
+    /*public enum States {
         OpenDoor,
         CloseDoor,
         Hello,
@@ -27,5 +26,5 @@ public class TutorialGuy : PassengerController2 {
 	// Use this for initialization
 	void Start () {
 		
-	}
+	}*/
 }
