@@ -11,7 +11,7 @@ public class SoundIcon : MonoBehaviour {
 	private GameObject Arrow;
 	private GameObject Brackets;
 	[SerializeField]
-	private Sprite iconImage;
+	public Sprite iconImage;
 
 	private static float border = 1.5f;
 	private static float iconscale = 10f;
@@ -21,22 +21,26 @@ public class SoundIcon : MonoBehaviour {
 
 	void Start () {
 		//Setup the icon
+		this.transform.SetParent(SoundCamera.soundCamera.origin.transform);
 		icon = new GameObject("Icon", new System.Type[] {typeof(RectTransform), typeof(Image)});
 		icon.GetComponent<Image>().sprite = iconImage;
 		icon.transform.SetParent(SoundCamera.soundCamera.canvas.transform);
 		icon.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
+		icon.layer = 5;
 		Arrow = new GameObject("Arrow", new System.Type[] {typeof(RectTransform), typeof(Image)});
 		Arrow.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
 		Arrow.transform.localScale = Vector3.one * typeIndicatorScale;
 		Arrow.transform.SetParent(icon.transform);
-		Arrow.GetComponent<Image>().sprite = SoundIconSpriteManager.instance.Arrow;
+		Arrow.GetComponent<Image>().sprite = SoundIconSpriteManager.instance.data.Arrow;
 		Arrow.gameObject.SetActive(false);
+		Arrow.layer = 5;
 		Brackets = new GameObject("Bracket", new System.Type[] {typeof(RectTransform), typeof(Image)});
 		Brackets.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 1);
 		Brackets.transform.localScale = Vector3.one * typeIndicatorScale;
 		Brackets.transform.SetParent(icon.transform);
-		Brackets.GetComponent<Image>().sprite = SoundIconSpriteManager.instance.Brackets;
+		Brackets.GetComponent<Image>().sprite = SoundIconSpriteManager.instance.data.Brackets;
 		Brackets.gameObject.SetActive(false);
+		Brackets.layer = 5;
 		//Iconscale
 		icon.transform.localScale = Vector3.one * iconscale;
 	}
@@ -45,7 +49,6 @@ public class SoundIcon : MonoBehaviour {
 		float planeDistance = SoundCamera.soundCamera.canvas.planeDistance;
 		
 		Vector3 up = SoundCamera.soundCamera.transform.up;
-
 		
 		//Normal of projection plane (the canvas)
 		Vector3 n = SoundCamera.soundCamera.transform.forward;
@@ -92,9 +95,19 @@ public class SoundIcon : MonoBehaviour {
 			Arrow.SetActive(true);
 			Arrow.transform.localRotation = Quaternion.FromToRotation(up, (canvasspace - clampedspace).normalized);
 		}
+
+		icon.transform.localPosition = clampedspace;
+		icon.transform.localRotation = Quaternion.Euler(0,0,0);
 	}
 
 	public static Vector4 ToV4(Vector3 x) {
 		return new Vector4(x.x, x.y, x.z, 1);
+	}
+
+	public void Remove() {
+		Destroy(icon);
+		Destroy(Arrow);
+		Destroy(Brackets);
+		Destroy(this.gameObject);
 	}
 }

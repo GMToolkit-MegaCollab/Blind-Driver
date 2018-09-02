@@ -17,13 +17,6 @@ public class Car : MonoBehaviour {
     public float wheelFriction = 10;
     public float engineAcceleration = 1;
 
-<<<<<<< HEAD
-    void Start() {
-        volume_scale = tire_sounds.volume;
-    }
-
-=======
->>>>>>> origin/master
     void FixedUpdate() {
 
         bool brakes = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0);
@@ -66,8 +59,7 @@ public class Car : MonoBehaviour {
         }
     }
 
-    /*void OnTriggerStay2D(Collider2D other)
-    {
+    /*void OnTriggerStay2D(Collider2D other) {
         // See if that's a road surface, and if it is, play sounds
         Surface s = other.gameObject.GetComponent<Surface>();
         if(s != null && tire_sounds.clip != s.sound)

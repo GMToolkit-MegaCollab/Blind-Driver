@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 //Handles the core of the scene
 [RequireComponent(typeof(Camera))]
@@ -17,18 +16,25 @@ public class SoundCamera : MonoBehaviour {
 		if (soundCamera == null) {
 			soundCamera = this;
 		} else if (soundCamera != this) {
-			SceneManager.UnloadSceneAsync(this.gameObject.scene);
+			Destroy(this.transform.parent.gameObject);
 			throw new System.Exception("Error: Duplicate Sound rendering scene.");
 		}
-		//SceneManager.SetActiveScene(this.gameObject.scene);
 		this.camera = this.GetComponent<Camera>();
+		this.camera.cullingMask = 1 << 5;
+		GameObject root = new GameObject("Root");
+		this.transform.SetParent(root.transform);
+		this.transform.parent.position = Vector3.zero;
+		this.transform.position = Vector3.zero;
 		origin = new GameObject("origin");
+		origin.transform.SetParent(this.transform.parent);
+		origin.transform.position = Vector3.zero;
 		GameObject c = new GameObject("Canvas", new System.Type[] {typeof(Canvas)});
-		canvas = c.GetComponent<Canvas>();
 		c.transform.SetParent(this.transform);
-		//SceneManager.SetActiveScene(FindObjectOfType<Driver>().gameObject.scene);
+		canvas = c.GetComponent<Canvas>();
 		canvas.renderMode = RenderMode.ScreenSpaceCamera;
 		canvas.worldCamera = camera;
+		canvas.gameObject.layer = 5;
+		c.transform.localPosition = new Vector3(0f,0f,100f);
 	}
 	
 	// Update is called once per frame
