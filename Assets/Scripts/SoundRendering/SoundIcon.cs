@@ -7,18 +7,8 @@ using UnityEngine.UI;
 public class SoundIcon : MonoBehaviour {
 
 	public Vector3 orientation;
-	public float loudness {
-		set {
-			if (value > 0.1f) {
-				value = 0.1f;
-			}
-			if (icon != null) {
-				icon.GetComponent<Image>().color = new Color(1f,1f,1f, value * 10);
-				Brackets.GetComponent<Image>().color = new Color(1f,1f,1f, value * 40);
-				Arrow.GetComponent<Image>().color = new Color(1f,1f,1f, value * 40);
-			}
-		}
-	}
+	public float loudness;
+	private float lerpingFactor = 0.75f;
 
 	private GameObject icon;
 	private GameObject Arrow;
@@ -111,6 +101,15 @@ public class SoundIcon : MonoBehaviour {
 
 		icon.transform.localPosition = clampedspace;
 		icon.transform.localRotation = Quaternion.Euler(0,0,0);
+		
+		float a0 = icon.GetComponent<Image>().color.a;
+		float a1 = loudness * 10;
+		float a = a0 * (1 - lerpingFactor) + a1 * lerpingFactor;
+		
+		icon.GetComponent<Image>().color = new Color(1f,1f,1f, a);
+		Brackets.GetComponent<Image>().color = new Color(1f,1f,1f, a * 4);
+		Arrow.GetComponent<Image>().color = new Color(1f,1f,1f, a * 4);
+		
 	}
 
 	public static Vector4 ToV4(Vector3 x) {
