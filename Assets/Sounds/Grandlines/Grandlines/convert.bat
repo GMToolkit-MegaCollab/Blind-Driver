@@ -1,0 +1,1 @@
+for %%A IN (*.mp3) DO ffmpeg -i "%%A" -ar 44100 "foo\%%A.mp3"

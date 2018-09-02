@@ -27,7 +27,7 @@ public class Passenger : PassengerController2 {
         if (f != null) l.audioClips = data.Wall.left;
 		Play(start);
 		usedTriggers = new bool[data.TriggerResponses.Length];
-		usedTriggers = new bool[data.DistanceResponses.Length];
+		usedDistances = new bool[data.DistanceResponses.Length];
 	}
 
 	void Start() {
@@ -50,6 +50,10 @@ public class Passenger : PassengerController2 {
 	}
 	
 	public void TriggerEnter(Collider2D other) {
+		if (other.GetComponent<Goal>() != null) {
+			Play(end);
+			Destroy(this);
+		}
 		if (other.GetComponent<Trigger>() != null) {
 			int id = other.GetComponent<Trigger>().id;
 			PassengerData.TriggerClip triggered = this.data.TriggerResponses[id];

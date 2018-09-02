@@ -102,14 +102,6 @@ public class SoundIcon : MonoBehaviour {
 		icon.transform.localPosition = clampedspace;
 		icon.transform.localRotation = Quaternion.Euler(0,0,0);
 		
-		float a0 = icon.GetComponent<Image>().color.a;
-		float a1 = Mathf.Clamp(loudness * 1000, 0f, 1f);
-		float a = a0 * (1 - lerpingFactor) + a1 * lerpingFactor;
-		
-		icon.GetComponent<Image>().color = new Color(1f,1f,1f, a);
-		Brackets.GetComponent<Image>().color = new Color(1f,1f,1f, a * 4);
-		Arrow.GetComponent<Image>().color = new Color(1f,1f,1f, a * 4);
-		
 	}
 
 	public static Vector4 ToV4(Vector3 x) {

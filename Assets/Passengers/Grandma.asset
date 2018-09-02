@@ -20,11 +20,7 @@ MonoBehaviour:
     front:
     - {fileID: 8300000, guid: 71149e940d295a644b791928ec4c0f9c, type: 3}
   StartSequence:
-  - {fileID: 8300000, guid: 26b300d19b2e3484caff0d44824ac172, type: 3}
-  - {fileID: 8300000, guid: 0a85980bda56ddd43a7442afbe12c7c4, type: 3}
-  - {fileID: 8300000, guid: d48f3c87721f28a4b87877508bfe1c2a, type: 3}
-  - {fileID: 8300000, guid: d6fcbf643c00b654eb92a92348ce6959, type: 3}
-  - {fileID: 8300000, guid: a6a4b32cf1c8df34c9ec1a5fffedf224, type: 3}
+  - {fileID: 8300000, guid: 8d94390273a5f0f40968313045953096, type: 3}
   TriggerResponses:
   - clip: {fileID: 8300000, guid: 3271323937ab496468ae37072dc99f45, type: 3}
     reapeatable: 1
