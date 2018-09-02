@@ -104,7 +104,8 @@ public class GPS : PassengerController2 {
 
         //also start that one audio cue
         start = Combine(start, digits[1]);
-        Play(start);
+        if(start != null)
+            Play(start);
     }
 
     void Update() {

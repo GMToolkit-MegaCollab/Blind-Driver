@@ -20,11 +20,11 @@ public class Passenger : PassengerController2 {
 		start = Combine(data.StartSequence);
 		end = Combine(data.EndSequence);
 		Whisker f = this.transform.GetChild(0).GetComponent<Whisker>();
-		Whisker r = this.transform.GetChild(0).GetComponent<Whisker>();
-		Whisker l = this.transform.GetChild(0).GetComponent<Whisker>();
-		f.audioClips = data.Wall.front;
-		r.audioClips = data.Wall.right;
-		l.audioClips = data.Wall.left;
+		Whisker r = this.transform.GetChild(1).GetComponent<Whisker>();
+		Whisker l = this.transform.GetChild(2).GetComponent<Whisker>();
+		if(f!=null) f.audioClips = data.Wall.front;
+        if (f != null) r.audioClips = data.Wall.right;
+        if (f != null) l.audioClips = data.Wall.left;
 		Play(start);
 		usedTriggers = new bool[data.TriggerResponses.Length];
 		usedTriggers = new bool[data.DistanceResponses.Length];

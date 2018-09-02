@@ -13,9 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Grandma
   Wall:
-    left: []
-    right: []
-    front: []
+    left:
+    - {fileID: 8300000, guid: 6ae03aef9c4e64b46b434fddb47583ef, type: 3}
+    right:
+    - {fileID: 8300000, guid: 22f7b44fedc5c3043a8aa44ea78f44d8, type: 3}
+    front:
+    - {fileID: 8300000, guid: 71149e940d295a644b791928ec4c0f9c, type: 3}
   StartSequence:
   - {fileID: 8300000, guid: 26b300d19b2e3484caff0d44824ac172, type: 3}
   - {fileID: 8300000, guid: 0a85980bda56ddd43a7442afbe12c7c4, type: 3}
@@ -34,4 +37,5 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: cedb0b809d0af82408eb115a8865f41a, type: 3}
     reapeatable: 1
   DistanceResponses: []
-  EndSequence: []
+  EndSequence:
+  - {fileID: 8300000, guid: 0cc352ad44197d1428dc8fcf7b4643a1, type: 3}
