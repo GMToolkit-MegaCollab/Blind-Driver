@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c9aa732b8000743a49827bb0ef7623, type: 3}
+  m_Name: CreepDude
+  m_EditorClassIdentifier: 
+  Name: CreepDude
+  Wall:
+    left:
+    - {fileID: 8300000, guid: adbf0649374d8494bbd7cf719c441225, type: 3}
+    - {fileID: 8300000, guid: 6608fbef53341ea43b4592404ad2cbce, type: 3}
+    right:
+    - {fileID: 8300000, guid: 4f71c68a9c3951c45b6878a3b9769161, type: 3}
+    - {fileID: 8300000, guid: 2de4baeea6c141848969e890f887ca0d, type: 3}
+    front:
+    - {fileID: 8300000, guid: 19c072999a837d541b74edcb421fe4d7, type: 3}
+    - {fileID: 8300000, guid: 6e454cf1a0e5e924b88daaf53935e129, type: 3}
+  StartSequence:
+  - {fileID: 8300000, guid: cc536c2702e74fa4591b7d5cf7dcffb3, type: 3}
+  TriggerResponses:
+  - clip: {fileID: 8300000, guid: 9932c7622c18af941a6e4e30fd339a7b, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 38c2a7df158630741aa9406505b02476, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 2d88720f5ce86414eabe467801f476eb, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 7e5359374e5c8f043b06f4b3b3714a6d, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 5830e00fdbb15ee44a40525932996d73, type: 3}
+    reapeatable: 1
+  - clip: {fileID: 8300000, guid: 6e454cf1a0e5e924b88daaf53935e129, type: 3}
+    reapeatable: 1
+  DistanceResponses: []
+  EndSequence:
+  - {fileID: 8300000, guid: cbaf4011edd27c445b1c7d7f06a797ea, type: 3}

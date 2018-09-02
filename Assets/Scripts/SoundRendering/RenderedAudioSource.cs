@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class RenderedAudioSource : MonoBehaviour {
@@ -16,6 +17,15 @@ public class RenderedAudioSource : MonoBehaviour {
 	private float timeSinceMeasurement = 0f;
 	private float measureUpdateStep = 0.1f;
 	private int sampleDataLength = 1024;
+
+    void Awake()
+    {
+        if (SoundIconSpriteManager.instance == null)
+        {
+            LevelLoader.next_level = -1;
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
+    }
 
 	protected void Start () {
 		if (started) return;
