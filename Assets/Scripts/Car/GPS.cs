@@ -15,7 +15,7 @@ public class GPS : PassengerController2 {
     private NavMeshPath path;
     private NavMeshQueryFilter qfilter;
 
-    public float distance;
+    public float distance = 1000;
     public Vector2[] Path;
 
     public VoiceLine uTurn;
@@ -107,7 +107,7 @@ public class GPS : PassengerController2 {
         Play(start);
     }
 
-    void Update() {
+    new void Update() {
 
         //elapsed += Time.deltaTime;
         //if (elapsed >= 1.0f) {

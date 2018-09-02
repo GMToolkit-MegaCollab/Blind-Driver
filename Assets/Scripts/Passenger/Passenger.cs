@@ -20,8 +20,8 @@ public class Passenger : PassengerController2 {
 		start = Combine(data.StartSequence);
 		end = Combine(data.EndSequence);
 		Whisker f = this.transform.GetChild(0).GetComponent<Whisker>();
-		Whisker r = this.transform.GetChild(0).GetComponent<Whisker>();
-		Whisker l = this.transform.GetChild(0).GetComponent<Whisker>();
+		Whisker r = this.transform.GetChild(1).GetComponent<Whisker>();
+		Whisker l = this.transform.GetChild(2).GetComponent<Whisker>();
 		f.audioClips = data.Wall.front;
 		r.audioClips = data.Wall.right;
 		l.audioClips = data.Wall.left;
@@ -31,11 +31,22 @@ public class Passenger : PassengerController2 {
 	}
 
 	void Start() {
-		
+		gps = FindObjectOfType<GPS>();
 	}
 	
+	private float lastdist = float.MaxValue;
+
 	new void Update () {
 		base.Update();
+		float dist = gps.distance;
+		for (int i = 0; i < data.DistanceResponses.Length; i++) {
+			PassengerData.DistanceClip dclip = data.DistanceResponses[i];
+			if (dist < dclip.distance && lastdist > dclip.distance && (dclip.reapeatable || !usedDistances[i])) {
+				Play(dclip.clip);
+				usedDistances[i] = true;
+			}
+		}
+		lastdist = dist;
 	}
 	
 	public void TriggerEnter(Collider2D other) {
